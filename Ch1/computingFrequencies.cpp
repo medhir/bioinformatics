@@ -45,24 +45,56 @@ int PatternToNum(std::string pattern)
     return 0; 
   }
 
-  char symbol = pattern.back();
+  char symbol = *pattern.rbegin(); //retrieve last element of pattern
   std::string prefix = pattern.substr(0, pattern.length()-1);
   return 4 * PatternToNum(prefix) + SymbolToNum(symbol);
 }
 
-int computeFrequencies(std::string Text, int k) 
+std::string extract(int i, std::string Text, int patternLength) {
+  //return a string
+  std::string compare;
+
+  //starting at i, add chars to compare until it is |pattern|
+  for(int j = i, k = 0; k < patternLength; ++j, ++k) {
+    compare += Text[j];
+  }
+  return compare;
+}
+
+int* computeFrequencies(std::string Genome, int k) 
 {
-  int length = pow(4, k);
-  int frequencyArray[length];
+  int length = pow(4, k), traversalLength = Genome.length() - k;
+  int *frequencyArray = new int[length];
+
   for(int i = 0; i < length; ++i)
   {
     frequencyArray[i] = 0;
   }
+
+  for(int i = 0; i <= traversalLength; ++i) 
+  {
+    std::string Pattern = extract(i, Genome, k);
+    int j = PatternToNum(Pattern);
+    frequencyArray[j]++;
+  }
+
+  return frequencyArray;
 }
 
 int main()
 {
-  int index, k; std::cin >> index >> k;
-  std::cout << NumToPattern(index, k) << std::endl;
+  std::string Genome; int k; 
+  std::cin >> Genome >> k;
+
+  int* frequencies = computeFrequencies(Genome, k);
+  int freqArrayLength = pow(4, k);
+
+  for (int i = 0; i < pow(4, k); ++i) 
+  {
+    std::cout << frequencies[i] << " ";
+  }
+
+  std::cout << std::endl;
+
   return 0;
 }
