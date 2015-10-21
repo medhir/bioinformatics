@@ -1,7 +1,10 @@
 all: clumpDriver
 
-clumpDriver: computingFrequencies.o betterClumpFinding.o
-	g++ computingFrequencies.o betterClumpFinding.o -o clumpDriver
+clumpFinder: computingFrequencies.o betterClumpFinding.o clumpDriver.o
+	g++ computingFrequencies.o betterClumpFinding.o clumpDriver.o -o clumpFinder
+
+clumpDriver.o: clumpDriver.cpp
+	g++ -c clumpDriver.cpp
 
 computingFrequencies.o: computingFrequencies.cpp
 	g++ -c computingFrequencies.cpp

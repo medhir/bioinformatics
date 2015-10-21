@@ -2,14 +2,13 @@
 #include <string>
 #include <vector>
 #include "computingFrequencies.h"
-#include "betterClumpFinding.h"
 
 int main() 
 {
   std::string Genome; int k, L, t;
   std::cin >> Genome >> k >> L >> t;
-
-  std::vector<std::string> frequentPatterns = betterClumpFinding(Genome, k, t, L);
+  
+  std::vector<std::string> frequentPatterns = BetterClumpFinding(Genome, k, t, L);
 
   for(const auto &i : frequentPatterns) 
   {

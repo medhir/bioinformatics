@@ -14,4 +14,7 @@ std::string extract(int i, std::string Text, int patternLength);
 //frequency array generator
 int* computeFrequencies(std::string Genome, int k);
 
+//clump finding algorithm
+std::vector<std::string> BetterClumpFinding(std::string Genome, int k, int t, int L);
+
 #endif
