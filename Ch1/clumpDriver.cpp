@@ -7,15 +7,16 @@ int main()
 {
   std::string Genome; int k, L, t;
   std::cin >> Genome >> k >> L >> t;
-  
+
   std::vector<std::string> frequentPatterns = BetterClumpFinding(Genome, k, t, L);
 
-  for(const auto &i : frequentPatterns) 
-  {
-    std::cout << i << " ";
-  }
+  //remove duplicates from frequent patterns
+  std::sort(frequentPatterns.begin(), frequentPatterns.end());
+  auto last = std::unique(frequentPatterns.begin(), frequentPatterns.end());
+  frequentPatterns.erase(last, frequentPatterns.end());
 
-  std::cout << std::endl;
+
+  std::cout << frequentPatterns.size() << std::endl;
 
   return 0;
 }
