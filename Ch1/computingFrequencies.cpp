@@ -205,3 +205,17 @@ int hammingDistance(std::string a, std::string b)
   }
   return distance;
 }
+
+std::vector<int> approximateMatching(std::string pattern, std::string text, int d)
+{
+  std::vector<int> indeces;
+  for(int i = 0; i < (text.length()-pattern.length()); ++i) 
+  {
+    std::string compare = text.substr(i, pattern.length());
+    if(hammingDistance(pattern, compare) <= d) 
+    {
+      indeces.push_back(i);
+    }
+  }
+  return indeces;
+}

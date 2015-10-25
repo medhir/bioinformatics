@@ -25,4 +25,7 @@ std::vector<int> minimumSkew(std::string Genome);
 //hamming distance
 int hammingDistance(std::string a, std::string b);
 
+//approximate pattern matching
+std::vector<int> approximateMatching(std::string pattern, std::string text, int d);
+
 #endif
