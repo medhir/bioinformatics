@@ -192,3 +192,16 @@ std::vector<int> minimumSkew(std::string Genome)
   }
   return minIndeces;
 }
+
+int hammingDistance(std::string a, std::string b)
+{
+  int distance = 0, length = a.length();
+  for(int i = 0; i < length; ++i)
+  {
+    if(a[i] != b[i])
+    {
+      ++distance;
+    }
+  }
+  return distance;
+}
