@@ -17,4 +17,8 @@ int* computeFrequencies(std::string Genome, int k);
 //clump finding algorithm
 std::vector<std::string> BetterClumpFinding(std::string Genome, int k, int t, int L);
 
+int findMin(int* array, int length);
+int* determineSkew(std::string Genome);
+std::vector<int> minimumSkew(std::string Genome);
+
 #endif

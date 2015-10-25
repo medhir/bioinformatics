@@ -139,3 +139,56 @@ std::vector<std::string> BetterClumpFinding(std::string Genome, int k, int t, in
 
   return frequentPatterns;
 }
+
+int* determineSkew(std::string Genome) 
+{
+  int length = Genome.length();
+  int* skew = new int[length];
+  skew[0] = 0;
+
+  for(int i = 1; i <= length; ++i)
+  {
+    if(Genome[i-1] == 'G') 
+    {
+      skew[i] = skew[i-1] + 1;
+    }
+    else if(Genome[i-1] == 'C') 
+    {
+      skew[i] = skew[i-1] - 1;
+    }
+    else 
+    {
+      skew[i] = skew[i-1];
+    }
+  }
+
+  return skew;
+}
+
+int findMin(int* array, int length) 
+{
+  int min = array[0];
+  for(int i = 1; i < length; ++i)
+  {
+    if(array[i] < min)
+    {
+      min = array[i];
+    }
+  }
+  return min;
+}
+
+std::vector<int> minimumSkew(std::string Genome) 
+{
+  int* skew = determineSkew(Genome);
+  int length = Genome.length(), min = findMin(skew, length);
+  std::vector<int> minIndeces;
+  for(int i = 0; i < length; ++i) 
+  {
+    if(skew[i] == min)
+    {
+      minIndeces.push_back(i);
+    }
+  }
+  return minIndeces;
+}
