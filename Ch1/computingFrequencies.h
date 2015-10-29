@@ -28,4 +28,9 @@ int hammingDistance(std::string a, std::string b);
 //approximate pattern matching
 std::vector<int> approximateMatching(std::string pattern, std::string text, int d);
 
+//Neighborhood of a string
+std::string Suffix(std::string pattern);
+std::string FirstSymbol(std::string pattern);
+std::vector<std::string> Neighbors(std::string pattern, int d);
+
 #endif

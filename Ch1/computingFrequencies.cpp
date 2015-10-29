@@ -219,3 +219,46 @@ std::vector<int> approximateMatching(std::string pattern, std::string text, int 
   }
   return indeces;
 }
+
+std::string Suffix(std::string pattern) 
+{
+  return pattern.substr(1, pattern.length()-1);
+}
+
+std::string FirstSymbol(std::string pattern) 
+{
+  return pattern.substr(0, 1);
+}
+
+std::vector<std::string> Neighbors(std::string pattern, int d)
+{
+  if(d == 0) 
+  {
+    std::vector<std::string> set = {pattern};
+    return set;
+  }
+  if(pattern.length() == 1) 
+  {
+    std::vector<std::string> set = {"A", "C", "G", "T"};
+    return set;
+  }
+  std::vector<std::string> Neighborhood;
+  std::vector<std::string> SuffixNeighbors = Neighbors(Suffix(pattern), d);
+
+  for(const auto& text : SuffixNeighbors) 
+  {
+    if(hammingDistance(Suffix(pattern), text) < d)
+    {
+      Neighborhood.push_back("A" + text);
+      Neighborhood.push_back("C" + text);
+      Neighborhood.push_back("T" + text);
+      Neighborhood.push_back("G" + text);
+    }
+    else
+    {
+      Neighborhood.push_back(FirstSymbol(pattern) + text);
+    }
+  }
+
+  return Neighborhood;
+}
