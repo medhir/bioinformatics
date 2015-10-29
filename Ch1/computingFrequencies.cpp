@@ -262,3 +262,49 @@ std::vector<std::string> Neighbors(std::string pattern, int d)
 
   return Neighborhood;
 }
+
+int findMax(int* array, int length)
+{
+  int max = array[0];
+  for(int i = 1; i < length; ++i)
+  {
+    if(array[i] > max)
+    {
+      max = array[i];
+    }
+  }
+  return max;
+}
+
+std::vector<std::string> FrequentWordsWithMismatches(std::string text, int k, int d) 
+{
+  std::vector<std::string> FrequentPatterns; int length = pow(4, k);
+  int* close = new int[length];
+
+  for(int i = 0; i < length; ++i)
+  { 
+    close[i] = 0;
+  }
+
+  for(int i = 0; i <= text.length()-k; ++i) 
+  {
+    std::vector<std::string> neighborhood = Neighbors(text.substr(i, k), d);
+    for(const auto& pattern : neighborhood) 
+    {
+      int index = PatternToNum(pattern);
+      close[index]++;
+    }
+  }
+
+  int maxCount = findMax(close, length);
+  for(int i = 0; i < length; ++i) 
+  {
+    if(close[i] == maxCount) 
+    {
+      std::string pattern = NumToPattern(i, k);
+      FrequentPatterns.push_back(pattern);
+    }
+  }
+
+  return FrequentPatterns;
+}

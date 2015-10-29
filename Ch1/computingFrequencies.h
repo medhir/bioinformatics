@@ -33,4 +33,8 @@ std::string Suffix(std::string pattern);
 std::string FirstSymbol(std::string pattern);
 std::vector<std::string> Neighbors(std::string pattern, int d);
 
+//frequent words with mismatches
+int findMax(int* array, int length);
+std::vector<std::string> FrequentWordsWithMismatches(std::string text, int k, int d);
+
 #endif
