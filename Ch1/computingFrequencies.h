@@ -27,6 +27,7 @@ int hammingDistance(std::string a, std::string b);
 
 //approximate pattern matching
 std::vector<int> approximateMatching(std::string pattern, std::string text, int d);
+int approximatePatternCount(std::string text, std::string pattern, int d);
 
 //Neighborhood of a string
 std::string Suffix(std::string pattern);
@@ -35,6 +36,8 @@ std::vector<std::string> Neighbors(std::string pattern, int d);
 
 //frequent words with mismatches
 int findMax(int* array, int length);
+std::string reverseComplement(std::string pattern);
 std::vector<std::string> FrequentWordsWithMismatches(std::string text, int k, int d);
+std::vector<std::string> FrequentWordsWithMismatchesAndReverseCompliments(std::string text, int k, int d);
 
 #endif

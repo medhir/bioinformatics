@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <math.h>
+#include <algorithm>
 #include "computingFrequencies.h"
 
 char NumToSymbol(int num) 
@@ -220,6 +221,20 @@ std::vector<int> approximateMatching(std::string pattern, std::string text, int 
   return indeces;
 }
 
+int approximatePatternCount(std::string text, std::string pattern, int d) 
+{
+  int count = 0;
+  for(int i = 0; i <= (text.length() - pattern.length()); ++i)
+  {
+    std::string compare = text.substr(i, pattern.length());
+    if(hammingDistance(pattern, compare) <= d) 
+    {
+      ++count;
+    }
+  }
+  return count;
+}
+
 std::string Suffix(std::string pattern) 
 {
   return pattern.substr(1, pattern.length()-1);
@@ -276,6 +291,31 @@ int findMax(int* array, int length)
   return max;
 }
 
+std::string reverseComplement(std::string pattern) 
+{
+  std::string reverseComplement;
+  for(int i = pattern.length()-1; i >= 0; --i) 
+  {
+    if(pattern[i] == 'A') 
+    {
+      reverseComplement.push_back('T');
+    }
+    else if(pattern[i] == 'T')
+    {
+      reverseComplement.push_back('A');
+    } 
+    else if(pattern[i] == 'C')
+    {
+      reverseComplement.push_back('G');
+    }
+    else if(pattern[i] == 'G')
+    {
+      reverseComplement.push_back('C');
+    }
+  }
+  return reverseComplement;
+}
+
 std::vector<std::string> FrequentWordsWithMismatches(std::string text, int k, int d) 
 {
   std::vector<std::string> FrequentPatterns; int length = pow(4, k);
@@ -300,6 +340,49 @@ std::vector<std::string> FrequentWordsWithMismatches(std::string text, int k, in
   for(int i = 0; i < length; ++i) 
   {
     if(close[i] == maxCount) 
+    {
+      std::string pattern = NumToPattern(i, k);
+      FrequentPatterns.push_back(pattern);
+    }
+  }
+
+  return FrequentPatterns;
+}
+
+std::vector<std::string> FrequentWordsWithMismatchesAndReverseCompliments(std::string text, int k, int d)
+{
+  std::vector<std::string> FrequentPatterns; int length = pow(4, k);
+  int* close = new int[length]; int* FrequencyArray = new int[length];
+
+  for(int i = 0; i < length; ++i) 
+  {
+    close[i] = 0; FrequencyArray[i] = 0;
+  }
+
+  for(int i = 0; i <= text.length()-k; ++i) 
+  {
+    std::vector<std::string> neighborhood = Neighbors(text.substr(i, k), d);
+    for(auto pattern : neighborhood) 
+    {
+      int index = PatternToNum(pattern), rindex = PatternToNum(reverseComplement(pattern)); 
+      close[index] = 1, close[rindex] = 1; 
+    }
+
+  }
+
+  for(int i = 0; i < length; ++i) 
+  {
+    if(close[i] == 1) 
+    {
+      std::string pattern = NumToPattern(i, k);
+      FrequencyArray[i] = approximatePatternCount(text, pattern, d);
+    }
+  }
+
+  int maxCount = findMax(FrequencyArray, length);
+  for(int i = 0; i < length; ++i)
+  {
+    if(FrequencyArray[i] == maxCount) 
     {
       std::string pattern = NumToPattern(i, k);
       FrequentPatterns.push_back(pattern);
