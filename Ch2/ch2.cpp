@@ -1,52 +1,7 @@
 #include <vector> 
 #include <string>
+#include "../Ch1/computingFrequencies.h"
 #include "ch2.h"
-
-std::vector<std::string> Neighbors(std::string pattern, int d)
-{
-  if(d == 0) 
-  {
-    std::vector<std::string> set = {pattern};
-    return set;
-  }
-  if(pattern.length() == 1) 
-  {
-    std::vector<std::string> set = {"A", "C", "G", "T"};
-    return set;
-  }
-  std::vector<std::string> Neighborhood;
-  std::vector<std::string> SuffixNeighbors = Neighbors(Suffix(pattern), d);
-
-  for(const auto& text : SuffixNeighbors) 
-  {
-    if(hammingDistance(Suffix(pattern), text) < d)
-    {
-      Neighborhood.push_back("A" + text);
-      Neighborhood.push_back("C" + text);
-      Neighborhood.push_back("T" + text);
-      Neighborhood.push_back("G" + text);
-    }
-    else
-    {
-      Neighborhood.push_back(FirstSymbol(pattern) + text);
-    }
-  }
-
-  return Neighborhood;
-}
-
-int hammingDistance(std::string a, std::string b)
-{
-  int distance = 0, length = a.length();
-  for(int i = 0; i < length; ++i)
-  {
-    if(a[i] != b[i])
-    {
-      ++distance;
-    }
-  }
-  return distance;
-}
 
 bool patternExistsInString(std::string pattern, std::string text, int d) 
 {
@@ -84,7 +39,6 @@ std::vector<std::string> MotifEnumeration(std::vector<std::string> Dna, int k, i
 {
   std::vector<std::string> patterns;
 
-  //traverse all strings in Dna
   for(int i = 0; i < Dna.size(); ++i) 
   {
     for(int j = 0; j < Dna[i].length()-k; ++j)
@@ -93,7 +47,7 @@ std::vector<std::string> MotifEnumeration(std::vector<std::string> Dna, int k, i
       std::vector<std::string> neighbors = Neighbors(pattern, d);
       for(int k = 0; k < neighbors.size(); ++k) 
       {
-        if(patternExists(Dna, neighbors[k], d))
+        if(patternExistsInSet(Dna, neighbors[k], d))
         {
           patterns.push_back(neighbors[k]);
         }

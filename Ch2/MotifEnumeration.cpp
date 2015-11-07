@@ -8,7 +8,7 @@ int main()
   int k, d; std::vector<std::string> Dna, motifs;
   std::cin >> k >> d;
   std::string line;
-  while(getline(cin, line))
+  while(getline(std::cin, line))
   {
     Dna.push_back(line);
   }
