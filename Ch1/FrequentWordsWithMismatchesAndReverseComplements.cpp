@@ -8,7 +8,7 @@ int main()
   std::string Text; int k, d;
   std::cin >> Text >> k >> d;
 
-  std::vector<std::string> FrequentPatterns = FrequentWordsWithMismatchesAndReverseCompliments(Text, k, d);
+  std::vector<std::string> FrequentPatterns = FrequentWordsWithMismatchesAndReverseComplements(Text, k, d);
 
   for(const auto& pattern : FrequentPatterns) 
   {

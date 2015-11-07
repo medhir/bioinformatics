@@ -38,6 +38,6 @@ std::vector<std::string> Neighbors(std::string pattern, int d);
 int findMax(int* array, int length);
 std::string reverseComplement(std::string pattern);
 std::vector<std::string> FrequentWordsWithMismatches(std::string text, int k, int d);
-std::vector<std::string> FrequentWordsWithMismatchesAndReverseCompliments(std::string text, int k, int d);
+std::vector<std::string> FrequentWordsWithMismatchesAndReverseComplements(std::string text, int k, int d);
 
 #endif

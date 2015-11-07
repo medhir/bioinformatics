@@ -221,18 +221,10 @@ std::vector<int> approximateMatching(std::string pattern, std::string text, int 
   return indeces;
 }
 
-int approximatePatternCount(std::string text, std::string pattern, int d) 
+int approximatePatternCount(std::string pattern, std::string text, int d) 
 {
-  int count = 0;
-  for(int i = 0; i <= (text.length() - pattern.length()); ++i)
-  {
-    std::string compare = text.substr(i, pattern.length());
-    if(hammingDistance(pattern, compare) <= d) 
-    {
-      ++count;
-    }
-  }
-  return count;
+  std::vector<int> indeces = approximateMatching(pattern, text, d);
+  return indeces.size();
 }
 
 std::string Suffix(std::string pattern) 
@@ -349,7 +341,7 @@ std::vector<std::string> FrequentWordsWithMismatches(std::string text, int k, in
   return FrequentPatterns;
 }
 
-std::vector<std::string> FrequentWordsWithMismatchesAndReverseCompliments(std::string text, int k, int d)
+std::vector<std::string> FrequentWordsWithMismatchesAndReverseComplements(std::string text, int k, int d)
 {
   std::vector<std::string> FrequentPatterns; int length = pow(4, k);
   int* close = new int[length]; int* FrequencyArray = new int[length];
@@ -364,8 +356,8 @@ std::vector<std::string> FrequentWordsWithMismatchesAndReverseCompliments(std::s
     std::vector<std::string> neighborhood = Neighbors(text.substr(i, k), d);
     for(auto pattern : neighborhood) 
     {
-      int index = PatternToNum(pattern), rindex = PatternToNum(reverseComplement(pattern)); 
-      close[index] = 1, close[rindex] = 1; 
+      int index = PatternToNum(pattern);
+      close[index] = 1; 
     }
 
   }
@@ -375,7 +367,8 @@ std::vector<std::string> FrequentWordsWithMismatchesAndReverseCompliments(std::s
     if(close[i] == 1) 
     {
       std::string pattern = NumToPattern(i, k);
-      FrequencyArray[i] = approximatePatternCount(text, pattern, d);
+      FrequencyArray[i] = approximatePatternCount(text, pattern, d) +
+                          approximatePatternCount(reverseComplement(text), pattern, d);
     }
   }
 

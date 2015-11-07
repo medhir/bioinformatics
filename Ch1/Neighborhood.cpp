@@ -10,6 +10,8 @@ int main()
 
   std::vector<std::string> Neighborhood = Neighbors(pattern, d);
 
+  std::cout << "Size of " << d << "-neighborhood of " << pattern << " is " << Neighborhood.size() << std::endl;
+
   for(const auto& neighbor : Neighborhood) 
   {
     std::cout << neighbor << std::endl;
