@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector> 
 #include <string>
 #include "../Ch1/computingFrequencies.h"
@@ -41,7 +42,7 @@ std::vector<std::string> MotifEnumeration(std::vector<std::string> Dna, int k, i
 
   for(int i = 0; i < Dna.size(); ++i) 
   {
-    for(int j = 0; j < Dna[i].length()-k; ++j)
+    for(int j = 0; j <= Dna[i].length()-k; ++j)
     {
       std::string pattern = Dna[i].substr(j, k);
       std::vector<std::string> neighbors = Neighbors(pattern, d);
@@ -56,4 +57,5 @@ std::vector<std::string> MotifEnumeration(std::vector<std::string> Dna, int k, i
   }
 
   removeDuplicates(patterns);
+  return patterns;
 }
