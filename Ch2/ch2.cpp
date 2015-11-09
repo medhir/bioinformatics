@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector> 
 #include <string>
+#include <limits>
 #include "../Ch1/computingFrequencies.h"
 #include "ch2.h"
 
@@ -58,4 +59,29 @@ std::vector<std::string> MotifEnumeration(std::vector<std::string> Dna, int k, i
 
   removeDuplicates(patterns);
   return patterns;
+}
+
+int distance(std::string pattern, std::vector<std::string> dna)
+{
+  int sum = 0;
+  for(const auto& text : dna) 
+  {
+    int min = std::numeric_limits<int>::max(), length = pattern.length();
+    for(int i = 0; i <= (text.length()-length); ++i) 
+    { 
+      int hDist = hammingDistance(text.substr(i, length), pattern);
+      if(hDist < min)
+      {
+        min = hDist;
+      }
+    }
+    sum += min;
+  }
+  return sum;
+}
+
+std::string medianString(std::vector<std::string> dna, int k)
+{
+  int distance = std::numeric_limits<int>::max();
+  return "Hello";
 }
