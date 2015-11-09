@@ -61,6 +61,24 @@ std::vector<std::string> MotifEnumeration(std::vector<std::string> Dna, int k, i
   return patterns;
 }
 
+void generateKmers(int depth, int k, std::string base, std::vector<std::string> &set) 
+{
+  //adapted from http://stackoverflow.com/questions/5569453/c-output-all-possible-dna-kmers-of-a-given-length
+  //recursively generate all possible sequences of length k
+  if(depth == k)
+  {
+    set.push_back(base);
+  }
+  else 
+  {
+    char bases[] = {'A','C','G','T'};
+    for(int i = 0; i < 4; ++i)
+    {
+      generateKmers(depth+1, k, base + bases[i], set);
+    }
+  }
+}
+
 int distance(std::string pattern, std::vector<std::string> dna)
 {
   int sum = 0;
@@ -82,6 +100,19 @@ int distance(std::string pattern, std::vector<std::string> dna)
 
 std::string medianString(std::vector<std::string> dna, int k)
 {
-  int distance = std::numeric_limits<int>::max();
-  return "Hello";
+  int minDistance = std::numeric_limits<int>::max();
+  std::vector<std::string> kmers; generateKmers(0, k, "", kmers);
+  std::string medianString;
+
+  for(const auto& kmer : kmers) 
+  {
+    int d = distance(kmer, dna);
+
+    if(d < minDistance)
+    {
+      minDistance = d; medianString = kmer;
+    }
+  }
+
+  return medianString;
 }

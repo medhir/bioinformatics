@@ -7,14 +7,14 @@
 
 int main() 
 {
-  std::string pattern, text; std::cin >> pattern;
-  std::vector<std::string> dna;
+  int k; std::cin >> k; 
+  std::string text; std::vector<std::string> dna;
 
   while(std::cin >> text)
   { 
     dna.push_back(text);
   }
 
-  std::cout << distance(pattern, dna) << std::endl;
+  std::cout << medianString(dna, k) << std::endl;
   return 0;
 }
