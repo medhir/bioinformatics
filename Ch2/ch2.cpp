@@ -116,3 +116,29 @@ std::string medianString(std::vector<std::string> dna, int k)
 
   return medianString;
 }
+
+double probabilty(std::string kmer, double **profile)
+{
+  double prob = 1;
+  for(int i = 0; i < kmer.length(); ++i)
+  {
+    prob *= profile[SymbolToNum(kmer[i])][i];
+  }
+  return prob;
+}
+
+std::string profileMostProbableKmer(std::string text, int k, double **profile)
+{
+  double mostProbable = 0; std::string mostProbableKmer;
+  for(int i=0; i <= text.length()-k; ++i)
+  {
+    std::string kmer = text.substr(i, k);
+    double prob = probabilty(kmer, profile);
+    if(prob > mostProbable)
+    {
+      mostProbable = prob;
+      mostProbableKmer = kmer;
+    }
+  }
+  return mostProbableKmer;
+}

@@ -11,4 +11,7 @@ void generateKmers(int depth, int k, std::string base, std::vector<std::string> 
 int distance(std::string pattern, std::vector<std::string> dna);
 std::string medianString(std::vector<std::string> dna, int k);
 
+double probability(std::string kmer, double **profile);
+std::string profileMostProbableKmer(std::string text, int k, double **profile);
+
 #endif
