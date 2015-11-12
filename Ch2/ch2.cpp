@@ -129,7 +129,7 @@ double probabilty(std::string kmer, double **profile)
 
 std::string profileMostProbableKmer(std::string text, int k, double **profile)
 {
-  double mostProbable = 0; std::string mostProbableKmer;
+  double mostProbable = 0; std::string mostProbableKmer = text.substr(0, k);
   for(int i=0; i <= text.length()-k; ++i)
   {
     std::string kmer = text.substr(i, k);
@@ -140,6 +140,7 @@ std::string profileMostProbableKmer(std::string text, int k, double **profile)
       mostProbableKmer = kmer;
     }
   }
+
   return mostProbableKmer;
 }
 
@@ -158,37 +159,46 @@ double** initMatrix(int rows, int columns)
   double** matrix; matrix = new double *[rows];
   for(int i = 0; i < 4; ++i)
   {
-    profile[i] = new double[columns];
+    matrix[i] = new double[columns];
     for(int j = 0; j < columns; ++j)
     {
-      profile[i][j] = 0;
+      matrix[i][j] = 0;
     }
   }
-  return profile;
+  return matrix;
 }
 
 double** generateProfileMatrix(std::vector<std::string> motifs, int k)
 {
   double** profile = initMatrix(4, k);
+  std::cout << "matrix generated" << std::endl;
   int rows = motifs.size();
-
+  std::cout << "motif size: " << motifs.size() << std::endl;
   //generate count matrix
   for(int i = 0; i < rows; ++i)
   {
+    std::cout << motifs[i] << std::endl;
     for(int j = 0; j < k; ++j)
     {
+      std::cout << j << " " << k << std::endl;
+      std::cout << motifs[i][j] << " " << SymbolToNum(motifs[i][j]) << std::endl;
       profile[SymbolToNum(motifs[i][j])][j]++;
     }
   }
 
+  std::cout << "count matrix generated" << std::endl;
+
   //generate profile matrix from count matrix
-  for(int i = 0; i < rows; ++i)
+  for(int i = 0; i < 4; ++i)
   {
     for(int j = 0; j < k; ++j)
     {
       profile[i][j] = profile[i][j] / rows;
+      std::cout << i << " " << j << std::endl;
     }
   }
+
+  std::cout << "profile matrix generated" << std::endl;
 
   return profile;
 }
@@ -196,7 +206,7 @@ double** generateProfileMatrix(std::vector<std::string> motifs, int k)
 std::string consensusString(double** profile, int k)
 {
   std::string consensus;
-  for(int j = 0; i < k; ++j) 
+  for(int j = 0; j < k; ++j) 
   { 
     double maxProb = 0; int consensusIndex;
     for(int i = 0; i < 4; ++i)
@@ -215,6 +225,7 @@ std::string consensusString(double** profile, int k)
 int score(std::vector<std::string> motifs, int k)
 {
   double** profile = generateProfileMatrix(motifs, k);
+  std::cout << "profile generated" << std::endl;
   std::string consensus = consensusString(profile, k);
   int score;
 
@@ -235,10 +246,11 @@ std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, 
   {
     std::vector<std::string> motifs;
     motifs.push_back(firstString.substr(i, k));
-    for(int j = 2; j <= t; ++j)
+    for(int j = 1; j < t; ++j)
     {
       double** profile = generateProfileMatrix(motifs, k);
-      motifs.push_back(profileMostProbableKmer(motifs[j], k, profile));
+      std::cout << "profile most probable kmer: " << profileMostProbableKmer(dna[j], k, profile) << std::endl;
+      motifs.push_back(profileMostProbableKmer(dna[j], k, profile));
     }
 
     if(score(motifs, k) < score(bestMotifs, k))
@@ -247,5 +259,5 @@ std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, 
     }
   }
 
-  return motifs;
+  return bestMotifs;
 }
