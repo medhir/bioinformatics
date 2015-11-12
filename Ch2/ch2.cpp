@@ -171,34 +171,26 @@ double** initMatrix(int rows, int columns)
 double** generateProfileMatrix(std::vector<std::string> motifs, int k)
 {
   double** profile = initMatrix(4, k);
-  // std::cout << "matrix generated" << std::endl;
   int rows = motifs.size();
-  // std::cout << "motif size: " << motifs.size() << std::endl;
-  //generate count matrix
+
+  //generate count matrix 
   for(int i = 0; i < rows; ++i)
   {
-    // std::cout << motifs[i] << std::endl;
     for(int j = 0; j < k; ++j)
     {
-      // std::cout << j << " " << k << std::endl;
-      // std::cout << motifs[i][j] << " " << SymbolToNum(motifs[i][j]) << std::endl;
       profile[SymbolToNum(motifs[i][j])][j]++;
     }
   }
 
-  // std::cout << "count matrix generated" << std::endl;
-
-  //generate profile matrix from count matrix
+  //generate profile matrix
   for(int i = 0; i < 4; ++i)
   {
     for(int j = 0; j < k; ++j)
     {
-      profile[i][j] = profile[i][j] / rows;
-      // std::cout << i << " " << j << std::endl;
+      // profile[i][j] = profile[i][j] / rows;
+      profile[i][j] = (++profile[i][j]) / (rows+4); //improved greedy motif search using psuedocounts
     }
   }
-
-  // std::cout << "profile matrix generated" << std::endl;
 
   return profile;
 }
@@ -249,7 +241,6 @@ std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, 
     for(int j = 1; j < t; ++j)
     {
       double** profile = generateProfileMatrix(motifs, k);
-      // std::cout << "profile most probable kmer: " << profileMostProbableKmer(dna[j], k, profile) << std::endl;
       motifs.push_back(profileMostProbableKmer(dna[j], k, profile));
     }
 
