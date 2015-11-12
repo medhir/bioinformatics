@@ -142,3 +142,98 @@ std::string profileMostProbableKmer(std::string text, int k, double **profile)
   }
   return mostProbableKmer;
 }
+
+std::vector<std::string> extractMotifs(std::vector<std::string>& dna, int k)
+{
+  std::vector<std::string> motifs;
+  for(int i = 0; i < dna.size(); ++i)
+  {
+    motifs.push_back(dna[i].substr(0, k));
+  }
+  return motifs;
+}
+
+double** initMatrix(int rows, int columns)
+{
+  double** matrix; matrix = new double *[rows];
+  for(int i = 0; i < 4; ++i)
+  {
+    profile[i] = new double[columns];
+    for(int j = 0; j < columns; ++j)
+    {
+      profile[i][j] = 0;
+    }
+  }
+  return profile;
+}
+
+double** generateProfileMatrix(std::vector<std::string> motifs, int k)
+{
+  double** profile = initMatrix(4, k);
+  int rows = motifs.size();
+
+  //generate count matrix
+  for(int i = 0; i < rows; ++i)
+  {
+    for(int j = 0; j < k; ++j)
+    {
+      profile[SymbolToNum(motifs[i][j])][j]++;
+    }
+  }
+
+  //generate profile matrix from count matrix
+  for(int i = 0; i < rows; ++i)
+  {
+    for(int j = 0; j < k; ++j)
+    {
+      profile[i][j] = profile[i][j] / rows;
+    }
+  }
+
+  return profile;
+}
+
+std::string consensusString(double** profile, int k)
+{
+  std::string consensus;
+  for(int j = 0; i < k; ++j) 
+  { 
+    double maxProb = 0; int consensusIndex;
+    for(int i = 0; i < 4; ++i)
+    {
+      if(profile[i][j] > maxProb)
+      {
+        maxProb = profile[i][j];
+        consensusIndex = i;
+      }
+    }
+    consensus.push_back(NumToSymbol(consensusIndex));
+  }
+  return consensus;
+}
+
+
+
+std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, int t)
+{
+  std::vector<std::string> bestMotifs = extractMotifs(dna, k);
+  std::string firstString = dna[0];
+
+  for(int i = 0; i <= firstString.length()-k; ++i)
+  {
+    std::vector<std::string> motifs;
+    motifs.push_back(firstString.substr(i, k));
+    for(int j = 2; j <= t; ++j)
+    {
+      double** profile = generateProfileMatrix(motifs, k);
+      motifs.push_back(profileMostProbableKmer(motifs[j], k, profile));
+    }
+
+    if(score(motifs) < score(bestMotifs))
+    {
+      bestMotifs = motifs;
+    }
+  }
+
+  return motifs;
+}
