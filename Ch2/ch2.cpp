@@ -212,7 +212,19 @@ std::string consensusString(double** profile, int k)
   return consensus;
 }
 
+int score(std::vector<std::string> motifs, int k)
+{
+  double** profile = generateProfileMatrix(motifs, k);
+  std::string consensus = consensusString(profile, k);
+  int score;
 
+  for(int i = 0; i < motifs.size(); ++i)
+  {
+    score += hammingDistance(motifs[i], consensus);
+  }
+
+  return score;
+}
 
 std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, int t)
 {
@@ -229,7 +241,7 @@ std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, 
       motifs.push_back(profileMostProbableKmer(motifs[j], k, profile));
     }
 
-    if(score(motifs) < score(bestMotifs))
+    if(score(motifs, k) < score(bestMotifs, k))
     {
       bestMotifs = motifs;
     }

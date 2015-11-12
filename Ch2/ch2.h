@@ -15,6 +15,7 @@ double probability(std::string kmer, double **profile);
 std::string profileMostProbableKmer(std::string text, int k, double **profile);
 
 std::vector<std::string> extractMotifs(std::vector<std::string>& dna, int k);
+double** initMatrix(int rows, int columns);
 double** generateProfileMatrix(std::vector<std::string> motifs);
 std::string consensusString(double** profile, int k);
 int score(std::vector<std::string> motifs);
