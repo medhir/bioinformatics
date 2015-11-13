@@ -25,6 +25,6 @@ std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, 
 
 std::vector<std::string> randomSelect(std::vector<std::string> dna, int k);
 std::vector<std::string> generateMotifs(double** profile, std::vector<std::string> dna, int k);
-std::vector<std::string> randomizedMotifSearch(std::vector<std::string> dna, int k, int t, int runs);
+std::vector<std::string> randomizedMotifSearch(std::vector<std::string> dna, int k, int t);
 
 #endif

@@ -228,7 +228,7 @@ int score(std::vector<std::string> motifs, int k)
 {
   double** profile = generateProfileMatrix(motifs, k);
   std::string consensus = consensusString(profile, k);
-  int score;
+  int score = 0;
 
   for(int i = 0; i < motifs.size(); ++i)
   {
@@ -285,17 +285,13 @@ std::vector<std::string> generateMotifs(double** profile, std::vector<std::strin
   return motifSet;
 }
 
-std::vector<std::string> randomizedMotifSearch(std::vector<std::string> dna, int k, int t, int runs)
+std::vector<std::string> randomizedMotifSearch(std::vector<std::string> dna, int k, int t)
 {
   std::vector<std::string> motifs = randomSelect(dna, k), bestMotifs = motifs;
   int bestScore = score(bestMotifs, k);
 
-  for(int i = 0; i < runs; ++i)
+  while(true)
   {
-    if(i > 0) 
-    {
-      motifs = randomSelect(dna, k);
-    }
     double** profile = generateProfileMatrix(motifs, k);
     std::vector<std::string> motifs = generateMotifs(profile, dna, k);
     int motifScore = score(motifs, k);
@@ -304,7 +300,9 @@ std::vector<std::string> randomizedMotifSearch(std::vector<std::string> dna, int
       bestMotifs = motifs;
       bestScore = motifScore;
     }
+    else 
+    {
+      return bestMotifs;
+    }
   }
-
-  return bestMotifs;
 }
