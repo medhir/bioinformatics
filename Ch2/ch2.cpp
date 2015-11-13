@@ -2,8 +2,18 @@
 #include <vector> 
 #include <string>
 #include <limits>
+#include <ctime>
+#include <cstdlib>
 #include "../Ch1/computingFrequencies.h"
 #include "ch2.h"
+
+void printStrings(std::vector<std::string>& set)
+{
+  for(int i = 0; i < set.size(); ++i) 
+  {
+    std::cout << set[i] << std::endl;
+  }
+}
 
 bool patternExistsInString(std::string pattern, std::string text, int d) 
 {
@@ -218,7 +228,6 @@ int score(std::vector<std::string> motifs, int k)
 {
   double** profile = generateProfileMatrix(motifs, k);
   std::string consensus = consensusString(profile, k);
-  std::cout << std::endl; //for some reason, this line is necessary to get the correct output? so confused...
   int score;
 
   for(int i = 0; i < motifs.size(); ++i)
@@ -247,6 +256,53 @@ std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, 
     if(score(motifs, k) < score(bestMotifs, k))
     {
       bestMotifs = motifs;
+    }
+  }
+
+  return bestMotifs;
+}
+
+
+std::vector<std::string> randomSelect(std::vector<std::string> dna, int k)
+{
+  std::vector<std::string> randomStrings; 
+  for(int i = 0; i < dna.size(); ++i)
+  {
+    int range = dna[i].length()-k+1;
+    int index = rand()%range;
+    randomStrings.push_back(dna[i].substr(index, k));
+  }
+  return randomStrings;
+}
+
+std::vector<std::string> generateMotifs(double** profile, std::vector<std::string> dna, int k)
+{
+  std::vector<std::string> motifSet;
+  for(int i = 0; i < dna.size(); ++i) 
+  {
+    motifSet.push_back(profileMostProbableKmer(dna[i], k, profile));
+  }
+  return motifSet;
+}
+
+std::vector<std::string> randomizedMotifSearch(std::vector<std::string> dna, int k, int t, int runs)
+{
+  std::vector<std::string> motifs = randomSelect(dna, k), bestMotifs = motifs;
+  int bestScore = score(bestMotifs, k);
+
+  for(int i = 0; i < runs; ++i)
+  {
+    if(i > 0) 
+    {
+      motifs = randomSelect(dna, k);
+    }
+    double** profile = generateProfileMatrix(motifs, k);
+    std::vector<std::string> motifs = generateMotifs(profile, dna, k);
+    int motifScore = score(motifs, k);
+    if(motifScore < bestScore)
+    {
+      bestMotifs = motifs;
+      bestScore = motifScore;
     }
   }
 

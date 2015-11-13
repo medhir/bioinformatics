@@ -1,6 +1,8 @@
 #ifndef CH2_H
 #define CH2_H
 
+void printStrings(std::vector<std::string>& set);
+
 bool patternExistsInString(std::string pattern, std::string text, int d);
 bool patternExistsInSet(std::vector<std::string> Dna, std::string pattern, int d);
 void removeDuplicates(std::vector<std::string> &set);
@@ -18,7 +20,11 @@ std::vector<std::string> extractMotifs(std::vector<std::string>& dna, int k);
 double** initMatrix(int rows, int columns);
 double** generateProfileMatrix(std::vector<std::string> motifs);
 std::string consensusString(double** profile, int k);
-int score(std::vector<std::string> motifs);
+int score(std::vector<std::string> motifs, int k);
 std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, int t);
+
+std::vector<std::string> randomSelect(std::vector<std::string> dna, int k);
+std::vector<std::string> generateMotifs(double** profile, std::vector<std::string> dna, int k);
+std::vector<std::string> randomizedMotifSearch(std::vector<std::string> dna, int k, int t, int runs);
 
 #endif
