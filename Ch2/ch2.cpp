@@ -2,8 +2,8 @@
 #include <vector> 
 #include <string>
 #include <limits>
-#include <ctime>
-#include <cstdlib>
+#include <random>
+#include <array>
 #include "../Ch1/computingFrequencies.h"
 #include "ch2.h"
 
@@ -127,7 +127,7 @@ std::string medianString(std::vector<std::string> dna, int k)
   return medianString;
 }
 
-double probabilty(std::string kmer, double **profile)
+double probabilty(std::string kmer, double** profile)
 {
   double prob = 1;
   for(int i = 0; i < kmer.length(); ++i)
@@ -262,14 +262,20 @@ std::vector<std::string> greedyMotifSearch(std::vector<std::string> dna, int k, 
   return bestMotifs;
 }
 
+int generateRandomNumber(int min, int max) 
+{
+  //courtesy of http://stackoverflow.com/questions/27934180/math-random-equivalent-in-c  
+  std::mt19937 eng{std::random_device{}()};
+  std::uniform_int_distribution<int> dist(min, max);
+  return dist(eng);
+}
 
 std::vector<std::string> randomSelect(std::vector<std::string> dna, int k)
 {
   std::vector<std::string> randomStrings; 
   for(int i = 0; i < dna.size(); ++i)
   {
-    int range = dna[i].length()-k+1;
-    int index = rand()%range;
+    int index = generateRandomNumber(0, dna[i].length()-k);
     randomStrings.push_back(dna[i].substr(index, k));
   }
   return randomStrings;
@@ -305,4 +311,56 @@ std::vector<std::string> randomizedMotifSearch(std::vector<std::string> dna, int
       return bestMotifs;
     }
   }
+}
+
+std::string profileRandomlyGeneratedKmer(std::string text, int k, double** profile)
+{
+  int maxIndex = text.length()-k+1;
+  std::vector<double> probabilities;
+  for(int i = 0; i < maxIndex; ++i)
+  {
+    std::string kmer = text.substr(i, k); double prob = probabilty(kmer, profile);
+    probabilities.push_back(prob);
+  }
+
+  std::mt19937 eng{std::random_device{}()};
+  std::discrete_distribution<int> dist (probabilities.begin(), probabilities.end());
+
+  return text.substr(dist(eng), k);
+}
+
+std::vector<std::string> gibbsSampler(std::vector<std::string> dna, int k, int t, int N)
+{
+
+  std::vector<std::string> motifs, bestMotifs;
+
+  int bestScore = std::numeric_limits<int>::max(); 
+  for(int i = 0; i < 300; ++i)
+  {
+    motifs = randomizedMotifSearch(dna, k, t); 
+    int motifScore = score(motifs, k);
+    if(motifScore < bestScore)
+    {
+      bestScore = motifScore;
+      bestMotifs = motifs;
+    }
+  }
+
+  motifs = bestMotifs;
+
+  for(int j = 0; j < N; ++j)
+  {
+    int i = generateRandomNumber(0, t-1);
+    std::string removedMotif = motifs[i]; motifs.erase(motifs.begin()+i);
+    double** profile = generateProfileMatrix(motifs, k);
+    std::string motif = profileRandomlyGeneratedKmer(dna[i], k, profile);
+    motifs.insert(motifs.begin()+i, motif);
+
+    if(score(motifs, k) < score(bestMotifs, k))
+    {
+      bestMotifs = motifs;
+    }
+  }
+
+  return bestMotifs;
 }

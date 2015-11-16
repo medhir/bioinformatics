@@ -21,7 +21,7 @@ int main()
   int bestScore = std::numeric_limits<int>::max();
   std::vector<std::string> bestMotifs;
 
-  for(int i = 0; i < 1000; ++i)
+  for(int i = 0; i < 50000; ++i)
   {
     std::vector<std::string> motifs = randomizedMotifSearch(dna, k, t);
     int motifScore = score(motifs, k);
