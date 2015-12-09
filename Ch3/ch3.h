@@ -6,7 +6,7 @@ std::vector<std::string> composition(std::string text, int k);
 
 std::string reconstructFromGenomePath(std::vector<std::string> patterns);
 
-void printGraph(std::vector<std::string> patterns, bool** adjacencyMatrix, int n);
+void printGraph(std::vector<std::string> patterns, bool** adjacencyMatrix);
 std::string Prefix(std::string kmer);
 std::string Suffix(std::string kmer);
 bool** adjacencyMatrix(int n);

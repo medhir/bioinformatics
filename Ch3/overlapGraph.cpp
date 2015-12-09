@@ -11,5 +11,6 @@ int main()
     patterns.push_back(kmer);
   }
 
-  
+  bool** graph = overlapGraph(patterns);
+  printGraph(patterns, graph);
 }

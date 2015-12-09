@@ -32,8 +32,9 @@ std::string reconstructFromGenomePath(std::vector<std::string> patterns)
   return text;
 }
 
-void printGraph(std::vector<std::string> patterns, bool** adjacencyMatrix, int n)
+void printGraph(std::vector<std::string> patterns, bool** adjacencyMatrix)
 {
+  int n = patterns.size();
   for(int i = 0; i < n; ++i)
   {
     for(int j = 0; j < n; ++j)
@@ -82,7 +83,7 @@ bool** overlapGraph(std::vector<std::string> patterns)
     std::string suffix = Suffix(patterns[i]);
     for(int j = 0; j < n; ++j)
     {
-      std::string prefix = Prefix(patterns[i]);
+      std::string prefix = Prefix(patterns[j]);
       if(suffix == prefix)
       {
         graph[i][j] = 1;
