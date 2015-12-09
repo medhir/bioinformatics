@@ -39,21 +39,56 @@ void printGraph(std::vector<std::string> patterns, bool** adjacencyMatrix, int n
     for(int j = 0; j < n; ++j)
     {
       if(adjacencyMatrix[i][j] == 1)
+      {
+        std::cout << patterns[i] << " -> " << patterns[j] << std::endl;
+      }
     }
   }
 }
 
-std::string prefix(std::string kmer)
+std::string Prefix(std::string kmer)
 {
-
+  int length = kmer.length()-1;
+  return kmer.substr(0, length);
 }
 
-std::string suffix(std::string kmer) 
+std::string Suffix(std::string kmer) 
 {
-
+  int length = kmer.length()-1;
+  return kmer.substr(1, length);
 }
 
 bool** adjacencyMatrix(int n) 
 {
+  bool** matrix; matrix = new bool *[n];
+  for(int i = 0; i < n; ++i)
+  {
+    matrix[i] = new bool[n];
+    for(int j = 0; j < n; ++j)
+    {
+      matrix[i][j] = 0;
+    }
+  }
+  return matrix;
+}
 
+bool** overlapGraph(std::vector<std::string> patterns)
+{
+  int n = patterns.size();
+  bool** graph = adjacencyMatrix(n);
+
+  for(int i = 0; i < n; ++i)
+  {
+    std::string suffix = Suffix(patterns[i]);
+    for(int j = 0; j < n; ++j)
+    {
+      std::string prefix = Prefix(patterns[i]);
+      if(suffix == prefix)
+      {
+        graph[i][j] = 1;
+      }
+    }
+  }
+
+  return graph;
 }
