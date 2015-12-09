@@ -1,0 +1,591 @@
+AAF
+
+Academic Advisement - Farrior Hall
+
+AGRL
+
+Plant Pathology Research Lab 2
+
+AND
+
+Anderson Hall
+
+ANS
+
+Animal Sciences
+
+ANSC
+
+Animal/Dairy Science Building
+
+ARB
+
+Academic Research - Health Sciences Center
+
+ARCH
+
+Architecture
+
+ASF
+
+Elmore Hall
+
+AUD
+
+University Auditorium
+
+AWAX
+
+Aquatic Weed Annex
+
+BAR
+
+Bartram Hall
+
+BEC
+
+Beaty Commons
+
+BEN
+
+Benton Hall
+
+BGH
+
+Bruton-Geer Hall
+
+BLK
+
+Black Hall - Environmental Science
+
+BME
+
+Broad Biomedical Engineering Building
+
+BMS
+
+Biomedical Sciences
+
+BRO
+
+Broward Hall
+
+BRT
+
+Bryant Space Science Center
+
+BRY
+
+Bryan Hall
+
+BSU
+
+Veterinary Medicine - Basic Sciences
+
+CABL
+
+Course viewed only on cable TV
+
+CAR
+
+Carleton Auditorium
+
+CBD
+
+Classroom Building 105
+
+CGRC
+
+Cancer/Genetics Research
+
+CHE
+
+Chemical Engineering
+
+CLB
+
+Chemistry Laboratory Building
+
+COM
+
+Communicore - Health Sciences Center
+
+CON
+
+Constans Theatre
+
+CREC
+
+Citrus Hall, Ben Hill Griffin
+
+CRR
+
+Carr Hall
+
+CSFL
+
+Crops and Soils Field Lab
+
+CSE
+
+Computer Science Engineering
+
+DAU
+
+Dauer Hall - Arts & Sciences
+
+DSB
+
+Dental Science Building
+
+ESL
+
+Environmental Stress Lab
+
+EYN
+
+Entomology - Nematology
+
+FAA
+
+Fine Arts A
+
+FAB
+
+Fine Arts B (Gallery)
+
+FAC
+
+Fine Arts C
+
+FAD
+
+Fine Arts D
+
+FIF
+
+Fifield Hall
+
+FIRL
+
+Plant Pathology Research Lab 1
+
+FLAV
+
+Flavet Field
+
+FLG
+
+Florida Gym
+
+FLI
+
+Keene-Flint Hall
+
+FLO
+
+Griffin-Floyd Hall
+
+FSN
+
+Food Science and Human Nutrition
+
+GER
+
+Gerson Hall
+
+GRAO
+
+Graham Hall
+
+GRI
+
+Grinter Hall - The Graduate School
+
+HARN
+
+Harn Museum of Art
+
+HCAD
+
+Health Science Center Admin. Services
+
+HDC
+
+Human Development Center
+
+HGS
+
+Hough Hall
+
+HOL
+
+Holland Law Center
+
+HPNP
+
+Health Professions, Nursing and Pharmacy Complex
+
+HTUS
+
+South Barn - Sam Wall Animal Science
+
+HUB
+
+The Hub - International Studies Center
+
+HUME
+
+Hume Hall
+
+IBLC
+
+Institute of Black Culture
+
+IHLC
+
+Institute of Hispanic-Latino Cultures
+
+IIT
+
+IFAS Information Technology
+
+INF
+
+Infirmary
+
+JENB
+
+Jennings Hall B
+
+KEY
+
+Keys Complex - Student Housing
+
+LAR
+
+Larsen Hall
+
+LBW
+
+Library West
+
+LEI
+
+Leigh Hall
+
+LIT
+
+Little Hall
+
+LSP
+
+Livestock Pavilion, Webb
+
+MAE
+
+Materials Engineering
+
+MAEA
+
+Mechanical and Aerospace Engineering, Bldg. A
+
+MAEB
+
+Mechanical and Aerospace Engineering, Bldg. B
+
+MAEC
+
+Mechanical and Aerospace Engineering, Bldg. C
+
+MAT
+
+Matherly Hall
+
+MBI
+
+McKnight Brain Institute
+
+MCCA
+
+McCarty Hall, Bldg. A
+
+MCCB
+
+McCarty Hall, Bldg. B
+
+MCCC
+
+McCarty Hall, Bldg. C
+
+MCCD
+
+McCarty Hall, Bldg D
+
+MCG
+
+McGuire Center for Lepidoptera Research
+
+MCSB
+
+Microbiology and Cell Science
+
+MSB
+
+Medical Sciences - Stetson Hall
+
+MSL
+
+Marston Science Library
+
+MUB
+
+Music Building
+
+MUS
+
+Florida Museum of Natural History - Dickinson Hall
+
+NEB
+
+Engineering Building
+
+NEW
+
+Newell Hall
+
+NPB
+
+Physics Building
+
+NRB
+
+Nuclear Reactor
+
+NRG
+
+Norman Gymnasium
+
+NRN
+
+Norman Hall
+
+NRNA
+
+Norman Hall Addition
+
+NSC
+
+Nuclear Sciences Center
+
+NUL
+
+Animal Nutrition Labratory
+
+NZH
+
+Newins-Ziegler Hall
+
+ODAA
+
+Office of Development and Alumni Affairs
+
+OBS
+
+Student Observatory
+
+PCPA
+
+Phillips Center for the Performing Arts
+
+PEA
+
+Peabody Hall
+
+PHL
+
+Phelps Laboratory
+
+PKY
+
+P. K. Yonge Developmental Research School, 1080 SW 11 Street
+
+POOL
+
+Florida Pool
+
+POW
+
+Powell Hall - New Museum of Natural History
+
+PPD
+
+Physical Plant Offices
+
+PRL
+
+Food and Environmental Toxicology Lab
+
+PSB
+
+Shands Patient Services
+
+PSF
+
+Plant Science Facility
+
+PST
+
+Particle Sciences and Technology
+
+PSY
+
+Psychology
+
+PUGH
+
+Pugh Hall
+
+RCD
+
+Recreation Center Dining
+
+REI
+
+Reitz Union
+
+RFC
+
+Recreation and Fitness Center
+
+RHN
+
+Rhines Hall
+
+RLA
+
+Reed Lab
+
+RL1
+
+Research Laboratory
+
+RNK
+
+Rinker Hall
+
+ROG
+
+Rogers Hall
+
+ROL
+
+Rolfs Hall
+
+SBH
+
+Steinbrenner Band Hall
+
+SIS
+
+Sisler Hall - Chemistry Research Bldg
+
+SMA
+
+Library East, Smathers
+
+SOC
+
+Stephen C. O�Connell Center Pool
+
+SPRC
+
+Springs Commons Building
+
+SRPT
+
+IFAS Support Services
+
+SSB
+
+Criser Hall
+
+STA
+
+Stadium, Ben Hill Griffin
+
+STZ
+
+Stuzin Hall - Business Building
+
+SWC
+
+SW Recreation Complex
+
+THC
+
+Teaching Hospital and Clinics, Shands
+
+TIG
+
+Tigert Hall - UF Administration
+
+TUR
+
+Turlington Hall
+
+UST
+
+Ustler Hall
+
+VAN
+
+Van Fleet Hall - ROTC
+
+VET
+
+Veterinary Science
+
+VMAW
+
+Veterinary Medicine - Academic Wing
+
+WAL
+
+Walker Hall
+
+WALC
+
+Wallace Hall
+
+WARP
+
+WARP Haus - PHP Midtowne Center
+
+WAU
+
+Lake Wauburg
+
+WEB
+
+Internet Course
+
+WEIL
+
+Weil Hall
+
+WEIM
+
+Weimer Hall
+
+WM
+
+Williamson Hall
+
+WSFL
+
+Weed Sciences Field Building
+
+YON
+
+Yon Hall

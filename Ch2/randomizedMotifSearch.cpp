@@ -16,8 +16,6 @@ int main()
     dna.push_back(text);
   }
 
-  srand(time(NULL)); //initialize random seed
-
   int bestScore = std::numeric_limits<int>::max();
   std::vector<std::string> bestMotifs;
 
