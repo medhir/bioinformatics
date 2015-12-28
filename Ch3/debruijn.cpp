@@ -23,7 +23,7 @@ int main()
       }
     }
 
-    if(nodes.size() > 0)
+    if(list.size() > 0)
     {
       int commas = list.size()-1;
       std::cout << nodes[i] << " -> ";

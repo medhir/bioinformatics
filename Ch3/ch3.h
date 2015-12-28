@@ -12,10 +12,8 @@ std::string Suffix(std::string kmer);
 int** adjacencyMatrix(int n);
 int** overlapGraph(std::vector<std::string> patterns);
 
-void combineRows(int i, int j);
-void combineColumns(int i, int j);
+void printPathGraph(int k, std::vector<std::string>& nodes, int** pathGraph);
 std::vector<std::string> Nodes(int k, std::string text);
-
 int** glueNodes(int first, int second, std::vector<std::string>& nodes, int** pathGraph);
 int** PathGraph(int numNodes);
 int** DeBruijn(int k, std::string text, std::vector<std::string>& nodes);
