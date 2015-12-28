@@ -32,7 +32,7 @@ std::string reconstructFromGenomePath(std::vector<std::string> patterns)
   return text;
 }
 
-void printGraph(std::vector<std::string> patterns, bool** adjacencyMatrix)
+void printOverlapGraph(std::vector<std::string> patterns, int** adjacencyMatrix)
 {
   int n = patterns.size();
   for(int i = 0; i < n; ++i)
@@ -59,12 +59,12 @@ std::string Suffix(std::string kmer)
   return kmer.substr(1, length);
 }
 
-bool** adjacencyMatrix(int n) 
+int** adjacencyMatrix(int n) 
 {
-  bool** matrix; matrix = new bool *[n];
+  int** matrix; matrix = new int *[n];
   for(int i = 0; i < n; ++i)
   {
-    matrix[i] = new bool[n];
+    matrix[i] = new int[n];
     for(int j = 0; j < n; ++j)
     {
       matrix[i][j] = 0;
@@ -73,10 +73,10 @@ bool** adjacencyMatrix(int n)
   return matrix;
 }
 
-bool** overlapGraph(std::vector<std::string> patterns)
+int** overlapGraph(std::vector<std::string> patterns)
 {
   int n = patterns.size();
-  bool** graph = adjacencyMatrix(n);
+  int** graph = adjacencyMatrix(n);
 
   for(int i = 0; i < n; ++i)
   {
@@ -92,4 +92,106 @@ bool** overlapGraph(std::vector<std::string> patterns)
   }
 
   return graph;
+}
+
+void printPathGraph(int k, std::vector<std::string>& nodes, int** pathGraph)
+{
+  int spaces = k; 
+  while(spaces--)
+  {
+    std::cout << " ";
+  }
+
+  for(int i = 0; i < nodes.size(); ++i)
+  {
+    std::cout << nodes[i] << " ";
+  }
+
+  std::cout << std::endl;
+
+  for(int i = 0; i < nodes.size(); ++i)
+  {
+    std::cout << nodes[i] << " ";
+    for(int j = 0; j < nodes.size(); ++j)
+    {
+      std::cout << " " << pathGraph[i][j] << "  ";
+    }
+    std::cout << std::endl;
+  }
+}
+
+std::vector<std::string> Nodes(int k, std::string text)
+{
+  std::vector<std::string> nodes;
+  for(int i = 0; i <= text.length()-k+1; ++i)
+  { 
+    nodes.push_back(text.substr(i, k-1));
+  } 
+  return nodes;
+}
+
+int** glueNodes(int first, int second, std::vector<std::string>& nodes, int** pathGraph)
+{
+  int numNodes = nodes.size()-1;
+  int** newGraph = adjacencyMatrix(numNodes);
+
+  //combine columns
+  for(int i = 0; i < nodes.size(); ++i)
+  {
+    pathGraph[i][first] += pathGraph[i][second];
+  }
+
+  //combine rows 
+  for(int i = 0; i < nodes.size(); ++i)
+  {
+    pathGraph[first][i] += pathGraph[second][i];
+  }
+
+  //place values in new graph
+  for(int i = 0, ii = 0; i < numNodes; ++i, ++ii)
+  {
+    if(i == second) ++ii;
+    for(int j = 0, jj = 0; j < numNodes; ++j, ++jj)
+    {
+      if(j == second) ++jj;
+      newGraph[i][j] = pathGraph[ii][jj];
+    }
+  }
+
+  // delete node from vector
+  nodes.erase(nodes.begin()+second);
+
+  return newGraph;
+}
+
+int** PathGraph(int numNodes)
+{
+  int** graph = adjacencyMatrix(numNodes);
+
+  for(int i = 0; i < numNodes-1; ++i)
+  {
+    graph[i][i+1] = 1;
+  }
+
+  return graph;
+}
+
+
+int** DeBruijn(int k, std::string text, std::vector<std::string>& nodes)
+{
+  //create path graph
+  int** pathGraph = PathGraph(nodes.size());
+
+  for(int i = 0; i < nodes.size(); ++i)
+  {
+    for(int j = 0; j < nodes.size(); ++j)
+    {
+      if(nodes[i] == nodes[j] && i != j)
+      {
+        pathGraph = glueNodes(i, j, nodes, pathGraph);
+      }
+    }
+  }
+
+  return pathGraph;
 }
